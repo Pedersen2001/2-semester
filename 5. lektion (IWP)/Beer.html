@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <title>IWP Demo</title>
+  <meta charset="UTF-8">
+</head>
+<body>   
+    <form id="beerForm">
+    <fieldset> <legend> Vælg Øl Type: </legend>
+        <input type="radio" name="gæringstype" value="overgæret" checked> Overgæret (Ale)       
+        <input type="radio" name="gæringstype" value="undergæret"> Undergæret (Lager)  
+        <input type="radio" name="gæringstype" value="vildgæret" > Vildtgæret (Lambic)
+        <input type="button" id="start" value="Start">
+        </fieldset>
+    </form>
+    <script>
+  let beerType = document.querySelectorAll('#beerForm input[name="gæringstype"]');
+  let button = document.querySelector('#beerForm  input[type="button"]');
+ 
+  function listChecked(event){
+      for(let i of beerType)  console.log(i.value +":"+i.checked)
+  }
+  listChecked();
+
+  let h1 = document.createElement("h1");
+  h1.append("Vælg en Øl-type");
+  document.querySelector("#beerForm").before(h1);
+
+  button.addEventListener("click", listChecked);
+    </script>    
+</body>    
+</html>    
