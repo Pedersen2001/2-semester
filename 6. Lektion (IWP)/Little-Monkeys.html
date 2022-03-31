@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>IWP Validation Exercise</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <script>
-        function monkeysJump(event) {
-            event.preventDefault()
-            let NumberOfMonkeys = document.getElementById("monkeys").value;
-            let timerID = setInterval((() => NumberOfMonkeys = printMonkeys(NumberOfMonkeys, timerID)), 1000);
+      function monkeysJump(event) {
+        event.preventDefault();
+        let NumberOfMonkeys = document.getElementById("monkeys").value;
+        let timerID = setInterval(
+          () => (NumberOfMonkeys = printMonkeys(NumberOfMonkeys, timerID)),
+          1000
+        );
+      }
+
+      function printMonkeys(NumberOfMonkeys, timerID) {
+        console.log(NumberOfMonkeys);
+
+        try {
+          if (NumberOfMonkeys == "") throw "empty";
+          if (isNaN(NumberOfMonkeys)) throw "not a number";
+          NumberOfMonkeys = Number(NumberOfMonkeys);
+          if (NumberOfMonkeys < 1) throw "alteast 1 monkey is needed";
+          if (NumberOfMonkeys > 5) throw "no more than 5 monkeys";
+        } catch (error) {
+          console.log("Input is wrong, because " + error);
+          clearInterval(timerID);
+          return;
         }
-
-        function printMonkeys(NumberOfMonkeys, timerID) {
-            console.log(NumberOfMonkeys)
-
-            try {
-                if (NumberOfMonkeys == "") throw "empty";
-                if (isNaN(NumberOfMonkeys)) throw "not a number";
-                NumberOfMonkeys = Number(NumberOfMonkeys);
-                if (NumberOfMonkeys < 1) throw "alteast 1 monkey is needed";
-                if (NumberOfMonkeys > 5) throw "no more than 5 monkeys";
-            } catch (error) {
-                console.log("Input is wrong, because " + error);
-                clearInterval(timerID);
-                return;
-            }
-            let message = document.getElementById("message");
-            message.innerHTML += "There are " + NumberOfMonkeys + " monkeys jumping on the bed <br>";
-            return NumberOfMonkeys - 1;
-
-        }
-
+        let message = document.getElementById("message");
+        message.innerHTML +=
+          "There are " + NumberOfMonkeys + " monkeys jumping on the bed <br>";
+        return NumberOfMonkeys - 1;
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <form id="myForm">
-        How many little monkeys are jumping on the bed? <input type="text" id="monkeys" value="">
+      How many little monkeys are jumping on the bed?
+      <input type="text" id="monkeys" value="" />
     </form>
-    <div id="message" style="white-space: pre;"></div>
+    <div id="message" style="white-space: pre"></div>
     <script>
-        document.getElementById("myForm").addEventListener("submit", monkeysJump);
+      document.getElementById("myForm").addEventListener("submit", monkeysJump);
     </script>
-</body>
+  </body>
+</html>
